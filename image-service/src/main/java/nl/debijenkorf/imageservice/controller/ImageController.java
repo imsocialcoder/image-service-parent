@@ -40,5 +40,13 @@ public class ImageController {
         imageService.flushImage(predefinedImageType, reference);
         return new FlushResponse("Image flushed successfully", HttpStatus.OK.value());
     }
+
+    @GetMapping(value = "/")
+    @ResponseBody
+    public void show() {
+        imageService.getImage("", "", "");
+//        byte[] imageData = imageService.getImage(predefinedTypeName, dummySeoName, reference);
+//        return new ImageResponse(imageData, HttpStatus.OK.value());
+    }
 }
 

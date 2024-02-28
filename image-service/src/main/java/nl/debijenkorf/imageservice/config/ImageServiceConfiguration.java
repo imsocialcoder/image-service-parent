@@ -1,12 +1,10 @@
 package nl.debijenkorf.imageservice.config;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:application-${spring.profiles.active}.properties")
+@ConfigurationProperties
 public class ImageServiceConfiguration {
 
     @Value("${source.root.url}")
@@ -15,10 +13,10 @@ public class ImageServiceConfiguration {
     @Value("${aws.s3.endpoint}")
     private String awsS3Endpoint;
 
-    @Value("${aws.accesskey}")
+    @Value("${aws.s3.accesskey}")
     private String awsAccessKey;
 
-    @Value("${aws.secretkey}")
+    @Value("${aws.s3.secretkey}")
     private String awsSecretKey;
 
     @Value("${logdb.endpoint}")
@@ -33,43 +31,35 @@ public class ImageServiceConfiguration {
     @Value("${logdb.password}")
     private String logDbPassword;
 
-    @Bean
-    public String sourceRootUrl() {
+    public String getSourceRootUrl() {
         return sourceRootUrl;
     }
 
-    @Bean
-    public String awsS3Endpoint() {
+    public String getAwsS3Endpoint() {
         return awsS3Endpoint;
     }
 
-    @Bean
-    public String awsAccessKey() {
+    public String getAwsAccessKey() {
         return awsAccessKey;
     }
 
-    @Bean
-    public String awsSecretKey() {
+    public String getAwsSecretKey() {
         return awsSecretKey;
     }
 
-    @Bean
-    public String logDbEndpoint() {
+    public String getLogDbEndpoint() {
         return logDbEndpoint;
     }
 
-    @Bean
-    public String logDbName() {
+    public String getLogDbName() {
         return logDbName;
     }
 
-    @Bean
-    public String logDbUsername() {
+    public String getLogDbUsername() {
         return logDbUsername;
     }
 
-    @Bean
-    public String logDbPassword() {
+    public String getLogDbPassword() {
         return logDbPassword;
     }
 }
