@@ -1,11 +1,13 @@
 package nl.debijenkorf.imageservice.config;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties
+@Getter
 public class ImageServiceConfiguration {
 
     @Value("${source.root.url}")
@@ -31,36 +33,4 @@ public class ImageServiceConfiguration {
 
     @Value("${logdb.password}")
     private String logDbPassword;
-
-    public String getSourceRootUrl() {
-        return sourceRootUrl;
-    }
-
-    public String getAwsS3Endpoint() {
-        return awsS3Endpoint;
-    }
-
-    public String getAwsS3AccessKey() {
-        return awsS3AccessKey;
-    }
-
-    public String getAwsS3SecretKey() {
-        return awsS3SecretKey;
-    }
-
-    public String getLogDbEndpoint() {
-        return logDbEndpoint;
-    }
-
-    public String getLogDbName() {
-        return logDbName;
-    }
-
-    public String getLogDbUsername() {
-        return logDbUsername;
-    }
-
-    public String getLogDbPassword() {
-        return logDbPassword;
-    }
 }

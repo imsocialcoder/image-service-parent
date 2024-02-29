@@ -53,7 +53,7 @@ public class ImageServiceImpl implements ImageService{
         if(predefinedImageType.toLowerCase().equals("original")){
             flushAll();
         }else{
-            flushImageByReference(predefinedImageType, reference);
+            flushImageByTypeAndReference(predefinedImageType, reference);
         }
     }
 
@@ -81,7 +81,7 @@ public class ImageServiceImpl implements ImageService{
 
     }
 
-    private void flushImageByReference(String predefinedImageType, String reference){
+    private void flushImageByTypeAndReference(String predefinedImageType, String reference){
 
     }
 }
