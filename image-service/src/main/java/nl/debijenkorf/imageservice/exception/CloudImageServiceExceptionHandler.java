@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice
 @Profile("!local")
-public class CloudExceptionHandler {
+public class CloudImageServiceExceptionHandler {
 }
