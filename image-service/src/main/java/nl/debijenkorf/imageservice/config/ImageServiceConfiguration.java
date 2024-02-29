@@ -1,4 +1,5 @@
 package nl.debijenkorf.imageservice.config;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,10 @@ public class ImageServiceConfiguration {
     private String awsS3Endpoint;
 
     @Value("${aws.s3.accesskey}")
-    private String awsAccessKey;
+    private String awsS3AccessKey;
 
     @Value("${aws.s3.secretkey}")
-    private String awsSecretKey;
+    private String awsS3SecretKey;
 
     @Value("${logdb.endpoint}")
     private String logDbEndpoint;
@@ -39,12 +40,12 @@ public class ImageServiceConfiguration {
         return awsS3Endpoint;
     }
 
-    public String getAwsAccessKey() {
-        return awsAccessKey;
+    public String getAwsS3AccessKey() {
+        return awsS3AccessKey;
     }
 
-    public String getAwsSecretKey() {
-        return awsSecretKey;
+    public String getAwsS3SecretKey() {
+        return awsS3SecretKey;
     }
 
     public String getLogDbEndpoint() {

@@ -18,6 +18,18 @@ public class ImageServiceImpl implements ImageService{
     }
 
     public void flushImage(String predefinedImageType, String reference) {
+        if(predefinedImageType.toLowerCase().equals("original")){
+            flushAll();
+        }else{
+            flushImageByReference(predefinedImageType, reference);
+        }
+    }
+
+    private void flushAll(){
+
+    }
+
+    private void flushImageByReference(String predefinedImageType, String reference){
 
     }
 }

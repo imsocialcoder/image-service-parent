@@ -3,11 +3,9 @@ package nl.debijenkorf.imageservice.response;
 public class FlushResponse {
 
     private String message;
-    private int statusCode;
 
-    public FlushResponse(String message, int statusCode) {
+    public FlushResponse(String message) {
         this.message = message;
-        this.statusCode = statusCode;
     }
 }
 

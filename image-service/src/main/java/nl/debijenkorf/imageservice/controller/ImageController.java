@@ -4,8 +4,8 @@ import nl.debijenkorf.imageservice.response.FlushResponse;
 import nl.debijenkorf.imageservice.response.ImageResponse;
 import nl.debijenkorf.imageservice.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,31 +22,43 @@ public class ImageController {
 
     @GetMapping(value = "/show/{predefinedTypeName}/{dummySeoName}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     @ResponseBody
-    public ImageResponse showImage(
+    public ResponseEntity<ImageResponse> showImage(
             @PathVariable String predefinedTypeName,
             @PathVariable(required = false) String dummySeoName,
             @RequestParam String reference
     ) {
+        if (!isValidPredefinedType(predefinedTypeName)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (!isValidReference(reference)) {
+            return ResponseEntity.notFound().build();
+        }
+
         byte[] imageData = imageService.getImage(predefinedTypeName, dummySeoName, reference);
-        return new ImageResponse(imageData, HttpStatus.OK.value());
+        return ResponseEntity.ok(new ImageResponse(imageData));
     }
 
     @DeleteMapping("/flush/{predefinedImageType}")
     @ResponseBody
-    public FlushResponse flushImage(
+    public ResponseEntity<FlushResponse> flushImage(
             @PathVariable String predefinedImageType,
             @RequestParam String reference
     ) {
+        if (!isValidPredefinedType(predefinedImageType)) {
+            return ResponseEntity.notFound().build();
+        }
+
         imageService.flushImage(predefinedImageType, reference);
-        return new FlushResponse("Image flushed successfully", HttpStatus.OK.value());
+        return ResponseEntity.ok(new FlushResponse("Image flushed successfully"));
     }
 
-    @GetMapping(value = "/")
-    @ResponseBody
-    public void show() {
-        imageService.getImage("", "", "");
-//        byte[] imageData = imageService.getImage(predefinedTypeName, dummySeoName, reference);
-//        return new ImageResponse(imageData, HttpStatus.OK.value());
+    private boolean isValidPredefinedType(String predefinedTypeName) {
+        return predefinedTypeName != null && !predefinedTypeName.isEmpty();
+    }
+
+    private boolean isValidReference(String reference) {
+        return reference != null && !reference.isEmpty();
     }
 }
 
