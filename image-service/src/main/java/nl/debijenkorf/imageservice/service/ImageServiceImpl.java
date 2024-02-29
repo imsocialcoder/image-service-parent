@@ -1,21 +1,20 @@
 package nl.debijenkorf.imageservice.service;
 
-import nl.debijenkorf.imageservice.config.ImageServiceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ImageServiceImpl implements ImageService{
 
-    private final ImageServiceConfiguration config;
+    private final AWSS3Service awss3Service;
 
     @Autowired
-    public ImageServiceImpl(ImageServiceConfiguration config) {
-        this.config = config;
+    public ImageServiceImpl(AWSS3Service awss3Service) {
+        this.awss3Service = awss3Service;
     }
     public byte[] getImage(String predefinedTypeName, String reference) {
         //return optimized image from storage:
-        byte[] imageFromStorage = getOptimizedImageFromStorage(predefinedTypeName, reference);
+        byte[] imageFromStorage = awss3Service.getOptimizedImageFromStorage(predefinedTypeName, reference);
         if(imageFromStorage != null){
             return imageFromStorage;
         }
@@ -26,7 +25,7 @@ public class ImageServiceImpl implements ImageService{
 
         //Download the original image and save the original one
         byte[] downloadedOriginalImage = downloadImage(predefinedTypeName, reference);
-        saveImage(downloadedOriginalImage);
+        awss3Service.saveImage(downloadedOriginalImage);
 
         //Optimize original image and save it if exists in the storage
         //Call the method again
@@ -36,7 +35,7 @@ public class ImageServiceImpl implements ImageService{
     }
 
     private boolean isOriginalImageExistsOptimizeIt(String reference) {
-        byte[] originalImageFromStorage = getOriginalImageFromStorage(reference);
+        byte[] originalImageFromStorage = awss3Service.getOriginalImageFromStorage(reference);
         if(originalImageFromStorage != null){
             optimizeAndSaveImage(originalImageFromStorage);
             return true;
@@ -46,42 +45,20 @@ public class ImageServiceImpl implements ImageService{
 
     private void optimizeAndSaveImage(byte[] originalImageFromStorage) {
         byte[] optimizedImage = optimizeImage(originalImageFromStorage);
-        saveImage(optimizedImage);
+        awss3Service.saveImage(optimizedImage);
     }
 
     public void flushImage(String predefinedImageType, String reference) {
-        if(predefinedImageType.toLowerCase().equals("original")){
-            flushAll();
-        }else{
-            flushImageByTypeAndReference(predefinedImageType, reference);
-        }
-    }
-
-    private byte[] getOptimizedImageFromStorage(String predefinedTypeName, String reference) {
-        return null;
-    }
-
-    private byte[] getOriginalImageFromStorage(String reference) {
-        return null;
+        awss3Service.flushImage(predefinedImageType, reference);
     }
 
     private byte[] optimizeImage(byte[] originalImage){
         return null;
     }
 
-    private void saveImage(byte[] optimizedImage){
-
-    }
-
     private byte[] downloadImage(String predefinedTypeName, String reference){
         return null;
     }
 
-    private void flushAll(){
 
-    }
-
-    private void flushImageByTypeAndReference(String predefinedImageType, String reference){
-
-    }
 }

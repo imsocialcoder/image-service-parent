@@ -8,10 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties
 @Getter
-public class ImageServiceConfiguration {
-
-    @Value("${source.root.url}")
-    private String sourceRootUrl;
+public class ImageServiceAWSConfiguration {
 
     @Value("${aws.s3.endpoint}")
     private String awsS3Endpoint;
@@ -22,15 +19,4 @@ public class ImageServiceConfiguration {
     @Value("${aws.s3.secretkey}")
     private String awsS3SecretKey;
 
-    @Value("${logdb.endpoint}")
-    private String logDbEndpoint;
-
-    @Value("${logdb.name}")
-    private String logDbName;
-
-    @Value("${logdb.username}")
-    private String logDbUsername;
-
-    @Value("${logdb.password}")
-    private String logDbPassword;
 }
