@@ -35,7 +35,7 @@ public class ImageController {
             return ResponseEntity.notFound().build();
         }
 
-        byte[] imageData = imageService.getImage(predefinedTypeName, dummySeoName, reference);
+        byte[] imageData = imageService.getImage(predefinedTypeName, reference);
         return ResponseEntity.ok(new ImageResponse(imageData));
     }
 
