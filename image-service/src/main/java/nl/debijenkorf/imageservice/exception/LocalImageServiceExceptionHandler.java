@@ -1,6 +1,6 @@
 package nl.debijenkorf.imageservice.exception;
 
-import nl.debijenkorf.imageservice.service.AWSS3Service;
+import nl.debijenkorf.imageservice.service.aws.AWSS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;

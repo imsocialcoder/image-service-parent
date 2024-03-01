@@ -1,4 +1,4 @@
-package nl.debijenkorf.imageservice.service;
+package nl.debijenkorf.imageservice.service.aws;
 
 public interface AWSS3Service {
 

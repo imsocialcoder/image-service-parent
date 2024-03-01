@@ -1,6 +1,6 @@
 package nl.debijenkorf.imageservice.controller;
 
-import nl.debijenkorf.imageservice.service.ImageService;
+import nl.debijenkorf.imageservice.service.image.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

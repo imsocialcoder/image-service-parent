@@ -1,4 +1,4 @@
-package nl.debijenkorf.imageservice.service;
+package nl.debijenkorf.imageservice.service.aws;
 
 import nl.debijenkorf.imageservice.config.ImageServiceAWSConfiguration;
 import nl.debijenkorf.imageservice.config.ImageServicePredefinedTypesConfiguration;

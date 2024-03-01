@@ -1,9 +1,9 @@
-package nl.debijenkorf.imageservice.service;
+package nl.debijenkorf.imageservice.service.image;
 
-import nl.debijenkorf.imageservice.config.ImageServiceDownloadConfiguration;
 import nl.debijenkorf.imageservice.config.ImageServicePredefinedTypesConfiguration;
-import nl.debijenkorf.imageservice.exception.SourceImageNotFoundException;
 import nl.debijenkorf.imageservice.model.PredefinedImageType;
+import nl.debijenkorf.imageservice.service.imagedownload.ImageDownloadService;
+import nl.debijenkorf.imageservice.service.aws.AWSS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 public class ImageServiceImpl implements ImageService {
 
     private final AWSS3Service awss3Service;
-    private final ImageServiceDownloadConfiguration imageServiceDownloadConfiguration;
+    private final ImageDownloadService imageDownloadService;
     private final ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration;
 
     @Autowired
-    public ImageServiceImpl(AWSS3Service awss3Service, ImageServiceDownloadConfiguration imageServiceDownloadConfiguration, ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration) {
+    public ImageServiceImpl(AWSS3Service awss3Service, ImageDownloadService imageDownloadService, ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration) {
         this.awss3Service = awss3Service;
-        this.imageServiceDownloadConfiguration = imageServiceDownloadConfiguration;
+        this.imageDownloadService = imageDownloadService;
         this.imageServicePredefinedTypesConfiguration = imageServicePredefinedTypesConfiguration;
     }
     public byte[] getImage(String predefinedImageType, String reference) throws InterruptedException {
@@ -32,7 +32,7 @@ public class ImageServiceImpl implements ImageService {
         if (isOriginalImageExistsOptimizeIt(predefinedImageType, reference)) return getImage(predefinedImageType, reference);
 
         //Download the original image and save the original one
-        byte[] downloadedOriginalImage = downloadImage(reference);
+        byte[] downloadedOriginalImage = imageDownloadService.downloadImage(reference);
         awss3Service.saveImage(predefinedImageType, reference, downloadedOriginalImage);
 
         //Optimize original image and save it if exists in the storage
@@ -63,18 +63,18 @@ public class ImageServiceImpl implements ImageService {
         return originalImage;
     }
 
-    private byte[] downloadImage(String reference){
-        if(!isImageExists(reference))
-            throw new SourceImageNotFoundException(reference);
-
-        String sourceUrl = imageServiceDownloadConfiguration.getRootUrl();
-        //TODO Download from source URL
-        return new byte[0];
-    }
-
-    private boolean isImageExists(String reference){
-        return true;
-    }
+//    private byte[] downloadImage(String reference){
+//        if(!isImageExists(reference))
+//            throw new SourceImageNotFoundException(reference);
+//
+//        String sourceUrl = imageServiceDownloadConfiguration.getRootUrl();
+//        //TODO Download from source URL
+//        return new byte[0];
+//    }
+//
+//    private boolean isImageExists(String reference){
+//        return true;
+//    }
 
     public void flushImage(String predefinedImageType, String reference) {
         awss3Service.flushImage(predefinedImageType, reference);

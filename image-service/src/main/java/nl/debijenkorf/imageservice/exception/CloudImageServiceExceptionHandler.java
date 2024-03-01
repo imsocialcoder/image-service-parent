@@ -1,7 +1,7 @@
 package nl.debijenkorf.imageservice.exception;
 
 import nl.debijenkorf.imageservice.config.ImageServiceLogDBConfiguration;
-import nl.debijenkorf.imageservice.service.AWSS3Service;
+import nl.debijenkorf.imageservice.service.aws.AWSS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.annotation.Profile;

@@ -1,10 +1,11 @@
-package nl.debijenkorf.imageservice.service;
+package nl.debijenkorf.imageservice.service.aws;
 
 import nl.debijenkorf.imageservice.config.ImageServiceAWSConfiguration;
 import nl.debijenkorf.imageservice.config.ImageServicePredefinedTypesConfiguration;
 import nl.debijenkorf.imageservice.exception.PredefinedImageTypeNotFoundException;
 import nl.debijenkorf.imageservice.exception.S3WriteException;
 import nl.debijenkorf.imageservice.model.PredefinedImageType;
+import nl.debijenkorf.imageservice.service.aws.AWSS3ServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
