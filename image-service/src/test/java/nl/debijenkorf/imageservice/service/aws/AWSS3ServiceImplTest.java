@@ -5,7 +5,6 @@ import nl.debijenkorf.imageservice.config.ImageServicePredefinedTypesConfigurati
 import nl.debijenkorf.imageservice.exception.PredefinedImageTypeNotFoundException;
 import nl.debijenkorf.imageservice.exception.S3WriteException;
 import nl.debijenkorf.imageservice.model.PredefinedImageType;
-import nl.debijenkorf.imageservice.service.aws.AWSS3ServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,10 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @DisplayName("AWSS3Service Tests")
 class AWSS3ServiceImplTest {

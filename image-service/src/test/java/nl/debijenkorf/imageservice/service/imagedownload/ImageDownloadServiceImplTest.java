@@ -1,17 +1,17 @@
 package nl.debijenkorf.imageservice.service.imagedownload;
 
 import nl.debijenkorf.imageservice.config.ImageServiceDownloadConfiguration;
-import nl.debijenkorf.imageservice.exception.SourceImageNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
+@DisplayName("ImageDownloadService Tests")
 class ImageDownloadServiceImplTest {
 
     @Mock
@@ -26,6 +26,7 @@ class ImageDownloadServiceImplTest {
     }
 
     @Test
+    @DisplayName("Download Image Successfully")
     void downloadImage_ImageExists_Success() {
         String reference = "existing.jpg";
 

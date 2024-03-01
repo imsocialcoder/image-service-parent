@@ -1,7 +1,6 @@
 package nl.debijenkorf.imageservice.service.image;
 
 import nl.debijenkorf.imageservice.service.aws.AWSS3ServiceImpl;
-import nl.debijenkorf.imageservice.service.image.ImageServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
