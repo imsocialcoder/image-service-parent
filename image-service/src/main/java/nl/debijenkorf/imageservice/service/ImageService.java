@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImageService {
+public class ImageService implements ImageServiceInterface{
 
-    private final AWSS3Service awss3Service;
+    private final AWSS3ServiceInterface awss3Service;
     private final ImageServiceDownloadConfiguration imageServiceDownloadConfiguration;
     private final ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration;
 
     @Autowired
-    public ImageService(AWSS3Service awss3Service, ImageServiceDownloadConfiguration imageServiceDownloadConfiguration, ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration) {
+    public ImageService(AWSS3ServiceInterface awss3Service, ImageServiceDownloadConfiguration imageServiceDownloadConfiguration, ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration) {
         this.awss3Service = awss3Service;
         this.imageServiceDownloadConfiguration = imageServiceDownloadConfiguration;
         this.imageServicePredefinedTypesConfiguration = imageServicePredefinedTypesConfiguration;

@@ -1,7 +1,7 @@
 package nl.debijenkorf.imageservice.exception;
 
 import nl.debijenkorf.imageservice.config.ImageServiceLogDBConfiguration;
-import nl.debijenkorf.imageservice.service.AWSS3Service;
+import nl.debijenkorf.imageservice.service.AWSS3ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.annotation.Profile;
@@ -17,10 +17,10 @@ import java.io.IOException;
 public class CloudImageServiceExceptionHandler {
 
     private final ImageServiceLogDBConfiguration imageServiceLogDBConfiguration;
-    private final AWSS3Service awss3Service;
+    private final AWSS3ServiceInterface awss3Service;
 
     @Autowired
-    public CloudImageServiceExceptionHandler(ImageServiceLogDBConfiguration imageServiceLogDBConfiguration, AWSS3Service awss3Service){
+    public CloudImageServiceExceptionHandler(ImageServiceLogDBConfiguration imageServiceLogDBConfiguration, AWSS3ServiceInterface awss3Service){
         this.imageServiceLogDBConfiguration = imageServiceLogDBConfiguration;
         this.awss3Service = awss3Service;
     }

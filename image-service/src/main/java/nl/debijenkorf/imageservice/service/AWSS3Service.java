@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Service
-public class AWSS3Service {
+public class AWSS3Service implements AWSS3ServiceInterface{
     private final ImageServiceAWSConfiguration imageServiceAWSConfiguration;
     private final ResourceLoader resourceLoader;
     private final ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfiguration;

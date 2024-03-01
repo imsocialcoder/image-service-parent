@@ -1,6 +1,6 @@
 package nl.debijenkorf.imageservice.exception;
 
-import nl.debijenkorf.imageservice.service.AWSS3Service;
+import nl.debijenkorf.imageservice.service.AWSS3ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,10 @@ import java.io.IOException;
 @Profile("local")
 public class LocalImageServiceExceptionHandler {
     private final Logger logger = LoggerFactory.getLogger(LocalImageServiceExceptionHandler.class);
-    private final AWSS3Service awss3Service;
+    private final AWSS3ServiceInterface awss3Service;
 
     @Autowired
-    public LocalImageServiceExceptionHandler(AWSS3Service awss3Service){
+    public LocalImageServiceExceptionHandler(AWSS3ServiceInterface awss3Service){
         this.awss3Service = awss3Service;
     }
 
@@ -59,6 +59,6 @@ public class LocalImageServiceExceptionHandler {
     @ExceptionHandler(S3ConnectionException.class)
     public ResponseEntity<String> handleS3ConnectionException(S3ConnectionException e) {
         logger.error("There is no connection (or access) to S3.", e);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No connection (or access) to S3.");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 }
