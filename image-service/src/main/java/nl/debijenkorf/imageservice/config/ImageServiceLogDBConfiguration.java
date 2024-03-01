@@ -1,24 +1,17 @@
 package nl.debijenkorf.imageservice.config;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "logdb")
 @Getter
+@Setter
 public class ImageServiceLogDBConfiguration {
-
-    @Value("${logdb.endpoint}")
-    private String logDbEndpoint;
-
-    @Value("${logdb.name}")
-    private String logDbName;
-
-    @Value("${logdb.username}")
-    private String logDbUsername;
-
-    @Value("${logdb.password}")
-    private String logDbPassword;
+    private String endpoint;
+    private String name;
+    private String username;
+    private String password;
 }

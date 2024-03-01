@@ -1,15 +1,14 @@
 package nl.debijenkorf.imageservice.config;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "source")
 @Getter
+@Setter
 public class ImageServiceDownloadConfiguration {
-
-    @Value("${source.root.url}")
-    private String sourceRootUrl;
+    private String rootUrl;
 }
