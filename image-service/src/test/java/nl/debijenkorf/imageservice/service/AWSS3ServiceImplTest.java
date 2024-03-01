@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @DisplayName("AWSS3Service Tests")
-class AWSS3ServiceTest {
+class AWSS3ServiceImplTest {
 
     @Mock
     private ImageServiceAWSConfiguration imageServiceAWSConfigurationMock;
@@ -32,7 +32,7 @@ class AWSS3ServiceTest {
     private ImageServicePredefinedTypesConfiguration imageServicePredefinedTypesConfigurationMock;
 
     @InjectMocks
-    private AWSS3Service awsS3Service;
+    private AWSS3ServiceImpl awsS3ServiceImpl;
 
     @BeforeEach
     void setUp() {
@@ -58,12 +58,12 @@ class AWSS3ServiceTest {
         when(mockedConfiguration.getTypes()).thenReturn(predefinedTypesMap);
 
         // Inject dependencies into the AWSS3Service instance
-        AWSS3Service awsS3Service = new AWSS3Service(imageServiceAWSConfigurationMock, mockedResourceLoader, mockedConfiguration);
+        AWSS3ServiceImpl awsS3ServiceImpl = new AWSS3ServiceImpl(imageServiceAWSConfigurationMock, mockedResourceLoader, mockedConfiguration);
 
         when(mockedResourceLoader.getResource(classpath)).thenReturn(mockedResource);
         when(mockedResource.getInputStream()).thenReturn(getInputStream(expectedBytes));
 
-        byte[] result = awsS3Service.getOptimizedImageFromStorage(predefinedImageType, reference);
+        byte[] result = awsS3ServiceImpl.getOptimizedImageFromStorage(predefinedImageType, reference);
 
         assertArrayEquals(expectedBytes, result);
     }
@@ -77,7 +77,7 @@ class AWSS3ServiceTest {
         Map<String, PredefinedImageType> predefinedTypesMap = new HashMap<>();
         when(imageServicePredefinedTypesConfigurationMock.getTypes()).thenReturn(predefinedTypesMap);
 
-        assertThrows(PredefinedImageTypeNotFoundException.class, () -> awsS3Service.getOptimizedImageFromStorage(predefinedImageType, reference));
+        assertThrows(PredefinedImageTypeNotFoundException.class, () -> awsS3ServiceImpl.getOptimizedImageFromStorage(predefinedImageType, reference));
     }
 
     @Test
@@ -87,7 +87,7 @@ class AWSS3ServiceTest {
         String reference = "exampleReference";
         byte[] optimizedImage = "exampleBytes".getBytes();
 
-        assertThrows(S3WriteException.class, () -> awsS3Service.saveImage(predefinedImageType, reference, optimizedImage));
+        assertThrows(S3WriteException.class, () -> awsS3ServiceImpl.saveImage(predefinedImageType, reference, optimizedImage));
     }
 
     private InputStream getInputStream(byte[] bytes) {

@@ -1,6 +1,6 @@
 package nl.debijenkorf.imageservice.controller;
 
-import nl.debijenkorf.imageservice.service.ImageServiceInterface;
+import nl.debijenkorf.imageservice.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/image")
 public class ImageController {
 
-    private final ImageServiceInterface imageService;
+    private final ImageService imageService;
 
     @Autowired
-    public ImageController(ImageServiceInterface imageService) {
+    public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
 

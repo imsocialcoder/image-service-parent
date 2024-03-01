@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.Mockito.*;
 
 @DisplayName("ImageService Tests")
-class ImageServiceTest {
+class ImageServiceImplTest {
 
     @Mock
-    private AWSS3Service awss3ServiceMock;
+    private AWSS3ServiceImpl awss3ServiceImplMock;
 
     @InjectMocks
-    private ImageService imageService;
+    private ImageServiceImpl imageServiceImpl;
 
     @BeforeEach
     void setUp() {
@@ -30,9 +30,9 @@ class ImageServiceTest {
         String predefinedImageType = "thumbnail";
         String reference = "abc.jpg";
         byte[] expectedBytes = "exampleBytes".getBytes();
-        when(awss3ServiceMock.getOptimizedImageFromStorage(predefinedImageType, reference)).thenReturn(expectedBytes);
+        when(awss3ServiceImplMock.getOptimizedImageFromStorage(predefinedImageType, reference)).thenReturn(expectedBytes);
 
-        byte[] result = imageService.getImage(predefinedImageType, reference);
+        byte[] result = imageServiceImpl.getImage(predefinedImageType, reference);
 
         assertArrayEquals(expectedBytes, result);
     }
@@ -43,9 +43,9 @@ class ImageServiceTest {
         String predefinedImageType = "thumbnail";
         String reference = "reference.jpg";
 
-        doNothing().when(awss3ServiceMock).flushImage(predefinedImageType, reference);
-        imageService.flushImage(predefinedImageType, reference);
+        doNothing().when(awss3ServiceImplMock).flushImage(predefinedImageType, reference);
+        imageServiceImpl.flushImage(predefinedImageType, reference);
 
-        verify(awss3ServiceMock, times(1)).flushImage(predefinedImageType, reference);
+        verify(awss3ServiceImplMock, times(1)).flushImage(predefinedImageType, reference);
     }
 }
